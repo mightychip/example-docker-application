@@ -2,14 +2,13 @@ version: "3.1"
 
 services:
   database:
-    image: purpleowl/example-application-db
+    image: 172.16.118.137:5000/example-application-db:0.0.2-SNAPSHOT
     user: postgres
     ports:
       - "5432:5432"
 
   appserver:
-    image: purpleowl/example-application-data
-    user: gordon
+    image: 172.16.118.137:5000/example-application-data:0.0.2-SNAPSHOT
     ports:
       - "8081:8081"
-      - "8080:8080"
+      - "8085:8085"

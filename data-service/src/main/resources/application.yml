@@ -1,7 +1,7 @@
 #Server info...
 ---
 server:
-  port: 8080
+  port: 8085
 ---
 management:
   port: 8081
@@ -17,6 +17,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    database: postgresql
 ---
 spring:
   profiles: integration
@@ -29,3 +30,4 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
+    database: h2
