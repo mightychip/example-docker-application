@@ -6,6 +6,7 @@ server:
 management:
   port: 8081
 ---
+#Here's our Dev server profile.
 spring:
   profiles: dev
 
@@ -19,6 +20,8 @@ spring:
       ddl-auto: update
     database: postgresql
 ---
+#This profile is used for integration tests, when we're only running this Spring Boot application.  We still need a
+#database to point to for any integration tests that require one to be present.  This serves that purpose perfectly.
 spring:
   profiles: integration
 
