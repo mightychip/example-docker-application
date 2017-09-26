@@ -1,16 +1,21 @@
-version: "2"
-
 services:
   database:
-    container_name: db-container
+    container_name: database
     image: 172.16.118.137:5000/example-application-db:0.0.2-SNAPSHOT
     user: postgres
     ports:
       - "5432:5432"
+    networks:
+      - backend
 
-  appserver:
+  data-service:
     container_name: data-service
     image: 172.16.118.137:5000/example-application-data:0.0.2-SNAPSHOT
     ports:
       - "8081:8081"
       - "8085:8085"
+    networks:
+      - backend
+
+networks:
+  backend:
