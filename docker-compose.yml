@@ -2,12 +2,14 @@ version: "3.1"
 
 services:
   database:
+    container_name: db-container
     image: 172.16.118.137:5000/example-application-db:0.0.2-SNAPSHOT
     user: postgres
     ports:
       - "5432:5432"
 
   appserver:
+    container_name: data-service
     image: 172.16.118.137:5000/example-application-data:0.0.2-SNAPSHOT
     ports:
       - "8081:8081"

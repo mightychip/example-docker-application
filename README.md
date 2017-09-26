@@ -1,4 +1,4 @@
-# example-docker-application
-Just a simple example docker application... as much for practice as for showing people how docker and Spring Boot cooperate.  
+# Example Docker Application
+This is a simple Docker application which is going to be built upon and branched across several Blog entries and will be referred to extensively.
 
-This is a placeholder for something a little more noteworthy later on.
+Further, this helps will a hole that there appears to be in provision of a cohesive, followable example of how not only to create a Spring Boot application in a Docker Container, but to provide an automated delivery pipeline from Commit to Deployment.

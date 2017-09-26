@@ -11,7 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 @IntegrationTestProfile
 public class DataServiceApplicationTests {
-//TODO Figure out a way to fix this... for now, we just have to disable it, because the URL to the DB only exists when we run docker compose...
 	@Test
 	public void contextLoads() {
 	}

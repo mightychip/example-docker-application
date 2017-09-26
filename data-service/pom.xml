@@ -27,31 +27,45 @@
 	</properties>
 
 	<dependencies>
-		<!-- TODO Move this over to using undertow so we minimize overhead for something that will just be a flat REST service -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
+            <!-- To use Undertow, we must stop using Tomcat. -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jersey</artifactId>
-		</dependency>
 
-		<!-- TODO I'm not 100% sure we actually need this.... find out -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+            <!-- To use Undertow, we must stop using Tomcat. -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
 		</dependency>
+
+        <!-- Undertow is a better choice for a REST Service and will potentially provide better performance!  -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
 
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<!-- TODO Get a solid version for this, maybe? -->
-			<version>LATEST</version>
+			<version>1.4.196</version>
 			<scope>test</scope>
 		</dependency>
 
