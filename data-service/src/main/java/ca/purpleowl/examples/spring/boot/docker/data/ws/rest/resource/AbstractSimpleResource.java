@@ -1,0 +1,16 @@
+package ca.purpleowl.examples.spring.boot.docker.data.ws.rest.resource;
+
+abstract class AbstractSimpleResource<A, B> {
+
+    static final String DELETE_BY_ID_FAILURE_MSG = "Couldn't find or delete %s with ID: %s";
+    static final String DELETE_BY_ID_SUCCESS_MSG = "Found and deleted %s with ID: %s";
+    static final String FIND_BY_ID_FAILURE_MSG = "Couldn't find %s with ID: %s";
+    static final String FIND_BY_ID_SUCCESS_MSG = "Found %s with ID: %s";
+    static final String GENERIC_BAD_REQUEST_MSG = "Bad request against %s";
+    static final String INVALID_ID_MSG = "An invalid ID of %s was provided to %s!"; //We provide the method because logging at that granularity impacts performance.
+    static final String INVALID_UPDATE_MSG = "An attempt was made to update a non-existent %s with ID %s";
+    static final String UNEXPECTED_EXCEPTION_MSG = "Wow!! Something bad happened in %s!! %s";
+
+    abstract A convertToAsset(B model);
+    abstract B convertToEntity(A asset);
+}
