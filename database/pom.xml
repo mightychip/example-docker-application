@@ -6,7 +6,7 @@
 
     <groupId>ca.purpleowl.examples.spring.boot.docker</groupId>
     <artifactId>database</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>BLOG-POST-1</version>
     <packaging>pom</packaging>
 
     <build>
