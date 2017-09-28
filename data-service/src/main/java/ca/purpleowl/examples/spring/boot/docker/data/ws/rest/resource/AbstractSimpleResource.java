@@ -1,5 +1,11 @@
 package ca.purpleowl.examples.spring.boot.docker.data.ws.rest.resource;
 
+/**
+ * This is the base class for the REST Resources.  Any common methods will get placed here.
+ *
+ * @param <A> - The REST Asset, which the JSON model is built from.
+ * @param <B> - The JPA Entity, which gets stored in and retrieved from the storage mechanism.
+ */
 abstract class AbstractSimpleResource<A, B> {
 
     static final String DELETE_BY_ID_FAILURE_MSG = "Couldn't find or delete %s with ID: %s";

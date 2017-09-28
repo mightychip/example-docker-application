@@ -31,7 +31,7 @@ import java.util.Optional;
 @Scope("request")
 @RequestMapping("/example")
 public class ExampleResource extends AbstractSimpleResource<ExampleAsset, Example> {
-    private static final Logger logger = LoggerFactory.getLogger(ExampleResource.class);
+    private static Logger logger = LoggerFactory.getLogger(ExampleResource.class);
 
     private final ExampleRepository exampleRepo;
 
@@ -115,11 +115,6 @@ public class ExampleResource extends AbstractSimpleResource<ExampleAsset, Exampl
 
         Example entity = convertToEntity(asset);
 
-        //Huh... what about errors?  I guess that'll just automagically result in a 500, but that seems
-        //sloppy... and I don't want to do just a generic catch Exception.  I just hate those.  You should always be
-        //specific and - when using a repository - it's best to try and avoid being specific to exceptions thrown by
-        //the implementation under the Repository interface.
-        //TODO There must be a better way to do this.  Find it!
         entity = exampleRepo.save(entity);
 
         if(entity.getId() != null) {
@@ -186,7 +181,11 @@ public class ExampleResource extends AbstractSimpleResource<ExampleAsset, Exampl
     @JSONDELETE(path = "/{id}")
     public ResponseEntity deleteExample(@PathVariable("id") String id) {
         try {
-            if(exampleRepo.existsById(Long.parseLong(id))) {
+            Long longId = Long.parseLong(id);
+
+            if(exampleRepo.existsById(longId)) {
+                exampleRepo.deleteById(longId);
+
                 logger.debug(DELETE_BY_ID_SUCCESS_MSG,
                              Example.class.getSimpleName());
 

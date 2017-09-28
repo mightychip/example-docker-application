@@ -10,8 +10,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * In a further fight against the clutter, I'm making it so that we don't have to specify the method via
- * a parameter... just pick the right Annotation instead.
+ * See {@link JSONRequest} for a little more information on what we're doing here.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
