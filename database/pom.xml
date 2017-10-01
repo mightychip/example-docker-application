@@ -12,12 +12,7 @@
 
     <groupId>ca.purpleowl.examples.spring.boot.docker</groupId>
     <artifactId>database</artifactId>
-    <!--<version>BLOG-POST-1</version>-->
     <packaging>pom</packaging>
-
-    <!--<properties>-->
-        <!--<java.version>1.8</java.version>-->
-    <!--</properties>-->
 
     <build>
         <plugins>
