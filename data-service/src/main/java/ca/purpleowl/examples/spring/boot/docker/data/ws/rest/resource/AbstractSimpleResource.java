@@ -15,6 +15,8 @@ abstract class AbstractSimpleResource<A, B> {
     static final String GENERIC_BAD_REQUEST_MSG = "Bad request against %s";
     static final String INVALID_ID_MSG = "An invalid ID of %s was provided to %s!"; //We provide the method because logging at that granularity impacts performance.
     static final String INVALID_UPDATE_MSG = "An attempt was made to update a non-existent %s with ID %s";
+    static final String LIST_ENTITIES_SUCCESS_MSG = "Found %d %s entities to return!";
+    static final String LIST_ENTITIES_FAILURE_MSG = "No %s entities were found to return!";
     static final String UNEXPECTED_EXCEPTION_MSG = "Wow!! Something bad happened in %s!! %s";
 
     abstract A convertToAsset(B model);

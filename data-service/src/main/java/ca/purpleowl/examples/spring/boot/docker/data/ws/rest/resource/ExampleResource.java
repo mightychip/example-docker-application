@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.Optional;
 
 /**
@@ -45,6 +46,38 @@ public class ExampleResource extends AbstractSimpleResource<ExampleAsset, Exampl
     @Autowired
     public ExampleResource(ExampleRepository exampleRepo) {
         this.exampleRepo = exampleRepo;
+    }
+
+    /**
+     * Get a list of all {@link Example} entities storage in the persistent storage mechanism.
+     *
+     * @return A {@link ResponseEntity} containing an appropriate HTTP Status and - if present - any entities found.
+     */
+    @JSONGET
+    public ResponseEntity<ExampleAsset[]> getExamples() {
+        Long count = exampleRepo.count();
+
+        if(count > 0) {
+            Iterator<Example> result = exampleRepo.findAll().iterator();
+
+            ExampleAsset[] assets = new ExampleAsset[count.intValue()];
+            int i = 0;
+
+            while (result.hasNext()) assets[i++] = convertToAsset(result.next());
+
+            logger.debug(LIST_ENTITIES_SUCCESS_MSG,
+                         count,
+                         Example.class.getSimpleName());
+
+            return ResponseEntity.status(HttpStatus.OK)
+                                 .body(assets);
+        } else {
+            logger.warn(LIST_ENTITIES_FAILURE_MSG,
+                        Example.class.getSimpleName());
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                 .body(new ExampleAsset[0]);
+        }
     }
 
     /**

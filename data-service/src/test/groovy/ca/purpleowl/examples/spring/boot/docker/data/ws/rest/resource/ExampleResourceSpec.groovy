@@ -27,6 +27,7 @@ class ExampleResourceSpec extends Specification {
         exampleResource.logger = mockLogger
     }
 
+    //Test getExample(id)
     def "get existing record by ID"() {
         given:
         mockRepo.findById(_ as Long) >> Optional.of(new Example(id: 1, message: "test"))
