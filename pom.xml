@@ -4,10 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.0.M3</version>
+        <relativePath/>
+    </parent>
+
     <groupId>ca.purpleowl.examples.spring.boot</groupId>
     <artifactId>docker-application-example</artifactId>
     <version>BLOG-POST-1</version>
     <packaging>pom</packaging>
+
+
 
     <modules>
         <module>database</module>
@@ -19,27 +28,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
     </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <!-- Spring Boot Dependencies that you normally get from the parent -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.0.0.M4</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!-- Spring Data dependencies that you normally get from the Spring Boot Parent -->
-            <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-releasetrain</artifactId>
-                <version>Kay-RC3</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <repositories>
         <repository>
@@ -78,20 +66,4 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-
-    <!--<build>-->
-        <!--<plugins>-->
-            <!--&lt;!&ndash; gmavenplus actually takes care of our compiling... this is mainly here so that the IDE can figure out-->
-                 <!--what version and language level of Java is being used, so it can stop forgetting. &ndash;&gt;-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-compiler-plugin</artifactId>-->
-                <!--<version>3.7.0</version>-->
-                <!--<configuration>-->
-                    <!--<source>1.8</source>-->
-                    <!--<target>1.8</target>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-        <!--</plugins>-->
-    <!--</build>-->
 </project>
