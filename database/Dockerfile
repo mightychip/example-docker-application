@@ -1,7 +1,5 @@
 FROM postgres:9.6-alpine
 
-RUN mkdir -p /images/
-
 #For now, we'll just assume basic config works... this thing will probably not let us connect from a non-local address
 #or something with my luck...
 COPY pg_hba.conf /usr/share/postgresql/9.6/
