@@ -131,14 +131,16 @@ public class ExampleResource extends AbstractSimpleResource<ExampleAsset, Exampl
     /**
      * Provide a {@link ExampleAsset} and have it saved to the storage mechanism.  Successful saves result in a {@link ResponseEntity}
      * carrying the ID of the stored data.  Forgetting to provide an {@link ExampleAsset} result in a 400.  If the save
-     * doesn't work, then the result is obviously a 500.
+     * doesn't work, then the result is obviously a 500.  The ID of the Asset provided must be null.
+     *
+     * TODO Find a way to ignore the ID here... do we ignore it on this end or is it configuration of ExampleAsset???
      *
      * @param asset - A {@link ExampleAsset} populated the way you'd like it to be stored.  Note that the ID will be ignored.
      * @return A {@link ResponseEntity} with an appropriate status code and - if applicable - the ID of the stored data.
      */
     @JSONPOST
-    public ResponseEntity<Long> createExample(ExampleAsset asset) {
-        if(asset == null) {
+    public ResponseEntity<Long> createExample(@RequestBody ExampleAsset asset) {
+        if(asset == null || asset.getId() != null) {
             logger.warn(GENERIC_BAD_REQUEST_MSG,
                         "createExample");
 
@@ -170,7 +172,7 @@ public class ExampleResource extends AbstractSimpleResource<ExampleAsset, Exampl
      */
     @JSONPUT(path = "/{id}")
     public ResponseEntity<Long> updateExample(@PathVariable("id") String id,
-                                              ExampleAsset asset) {
+                                              @RequestBody ExampleAsset asset) {
         if(asset == null) {
             logger.warn(GENERIC_BAD_REQUEST_MSG,
                         "updateExample");
@@ -230,21 +232,22 @@ public class ExampleResource extends AbstractSimpleResource<ExampleAsset, Exampl
                             id);
 
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                                     .body(null);
+                                     .build();
             }
         } catch(NumberFormatException nfe) {
             logger.error(INVALID_ID_MSG,
                          id,
                          "deleteExample");
-        }
 
-        return null;
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                 .build();
+        }
     }
 
     @Override
     ExampleAsset convertToAsset(Example model) {
-        return new ExampleAsset(model.getId(),
-                                model.getMessage());
+        return new ExampleAsset().setId(model.getId())
+                                 .setMessage(model.getMessage());
     }
 
     @Override

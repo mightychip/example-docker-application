@@ -6,19 +6,24 @@ package ca.purpleowl.examples.spring.boot.docker.data.ws.rest.asset;
  * There's usually not much to these things, and that is most assuredly the case here.
  */
 public class ExampleAsset {
-    private final Long id;
-    private final String message;
-
-    public ExampleAsset(Long id, String message) {
-        this.id = id;
-        this.message = message;
-    }
+    private Long id;
+    private String message;
 
     public Long getId() {
         return id;
     }
 
+    public ExampleAsset setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
     public String getMessage() {
         return message;
+    }
+
+    public ExampleAsset setMessage(String message) {
+        this.message = message;
+        return this;
     }
 }
