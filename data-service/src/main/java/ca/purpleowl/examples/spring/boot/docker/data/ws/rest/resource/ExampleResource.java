@@ -46,6 +46,7 @@ public class ExampleResource extends AbstractSimpleResource<ExampleAsset, Exampl
     @Autowired
     public ExampleResource(ExampleRepository exampleRepo) {
         this.exampleRepo = exampleRepo;
+        assert exampleRepo != null;
     }
 
     /**
