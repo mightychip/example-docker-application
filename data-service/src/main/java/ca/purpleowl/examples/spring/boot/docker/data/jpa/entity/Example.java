@@ -1,8 +1,8 @@
 package ca.purpleowl.examples.spring.boot.docker.data.jpa.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "example")
