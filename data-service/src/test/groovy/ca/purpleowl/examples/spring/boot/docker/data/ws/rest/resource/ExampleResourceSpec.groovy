@@ -43,7 +43,7 @@ class ExampleResourceSpec extends Specification {
         payload instanceof ExampleAsset
         payload.id == 1
         payload.message == "test"
-        1 * mockLogger.debug('Found %s with ID: %s', 'Example', '1')
+        1 * mockLogger.debug('Found Example with ID: 1')
     }
 
     def "get non-existing record by ID"() {
@@ -58,7 +58,7 @@ class ExampleResourceSpec extends Specification {
         result instanceof ResponseEntity<ExampleAsset>
         result.statusCode == HttpStatus.NOT_FOUND
         result.body == null
-        1 * mockLogger.warn('Couldn\'t find %s with ID: %s', 'Example', '2')
+        1 * mockLogger.warn('Couldn\'t find Example with ID: 2')
     }
 
     def "provide bad ID"() {
@@ -70,7 +70,7 @@ class ExampleResourceSpec extends Specification {
         result instanceof ResponseEntity<ExampleAsset>
         result.statusCode == HttpStatus.BAD_REQUEST
         result.body == null
-        1 * mockLogger.warn('An invalid ID of %s was provided to %s!', 'A', 'getExample')
+        1 * mockLogger.warn('An invalid ID of A was provided to getExample!', _ as NumberFormatException)
     }
 
     //Since we control the mock of the Repo, we have to manually kick out this exception, hence being
@@ -87,6 +87,6 @@ class ExampleResourceSpec extends Specification {
         result instanceof ResponseEntity<ExampleAsset>
         result.statusCode == HttpStatus.INTERNAL_SERVER_ERROR
         result.body == null
-        1 * mockLogger.error('Wow!! Something bad happened in %s!! %s', 'getExample', 'mocked')
+        1 * mockLogger.error('Wow!! Something bad happened in getExample!! mocked', _ as IllegalArgumentException)
     }
 }

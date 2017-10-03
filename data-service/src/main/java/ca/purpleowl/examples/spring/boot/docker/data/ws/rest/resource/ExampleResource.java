@@ -65,15 +65,15 @@ public class ExampleResource extends AbstractSimpleResource<ExampleAsset, Exampl
 
             while (result.hasNext()) assets[i++] = convertToAsset(result.next());
 
-            logger.debug(LIST_ENTITIES_SUCCESS_MSG,
-                         count,
-                         Example.class.getSimpleName());
+            logger.debug(String.format(LIST_ENTITIES_SUCCESS_MSG,
+                                       count,
+                                       Example.class.getSimpleName()));
 
             return ResponseEntity.status(HttpStatus.OK)
                                  .body(assets);
         } else {
-            logger.warn(LIST_ENTITIES_FAILURE_MSG,
-                        Example.class.getSimpleName());
+            logger.warn(String.format(LIST_ENTITIES_FAILURE_MSG,
+                                      Example.class.getSimpleName()));
 
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                                  .body(new ExampleAsset[0]);
@@ -94,32 +94,34 @@ public class ExampleResource extends AbstractSimpleResource<ExampleAsset, Exampl
             Optional<Example> result = exampleRepo.findById(Long.parseLong(id));
 
             if(result.isPresent()) {
-                logger.debug(FIND_BY_ID_SUCCESS_MSG,
-                             Example.class.getSimpleName(),
-                             id);
+                logger.debug(String.format(FIND_BY_ID_SUCCESS_MSG,
+                                           Example.class.getSimpleName(),
+                                           id));
 
                 return ResponseEntity.status(HttpStatus.OK)
                                      .body(convertToAsset(result.get()));
             } else {
-                logger.warn(FIND_BY_ID_FAILURE_MSG,
-                            Example.class.getSimpleName(),
-                            id);
+                logger.warn(String.format(FIND_BY_ID_FAILURE_MSG,
+                                          Example.class.getSimpleName(),
+                                          id));
 
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                                      .build();
             }
         } catch(NumberFormatException nfe) {
-            logger.warn(INVALID_ID_MSG,
-                        id,
-                        "getExample");
+            logger.warn(String.format(INVALID_ID_MSG,
+                                      id,
+                                      "getExample"),
+                        nfe);
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                                  .build();
         } catch(IllegalArgumentException iae) {
             //This really shouldn't happen... so issue a 500.
-            logger.error(UNEXPECTED_EXCEPTION_MSG,
-                         "getExample",
-                         iae.getMessage());
+            logger.error(String.format(UNEXPECTED_EXCEPTION_MSG,
+                                       "getExample",
+                                       iae.getMessage()),
+                         iae);
 
             iae.printStackTrace();
 
@@ -132,8 +134,6 @@ public class ExampleResource extends AbstractSimpleResource<ExampleAsset, Exampl
      * Provide a {@link ExampleAsset} and have it saved to the storage mechanism.  Successful saves result in a {@link ResponseEntity}
      * carrying the ID of the stored data.  Forgetting to provide an {@link ExampleAsset} result in a 400.  If the save
      * doesn't work, then the result is obviously a 500.  The ID of the Asset provided must be null.
-     *
-     * TODO Find a way to ignore the ID here... do we ignore it on this end or is it configuration of ExampleAsset???
      *
      * @param asset - A {@link ExampleAsset} populated the way you'd like it to be stored.  Note that the ID will be ignored.
      * @return A {@link ResponseEntity} with an appropriate status code and - if applicable - the ID of the stored data.
@@ -153,9 +153,16 @@ public class ExampleResource extends AbstractSimpleResource<ExampleAsset, Exampl
         entity = exampleRepo.save(entity);
 
         if(entity.getId() != null) {
+            logger.debug(String.format(CREATE_ENTITY_SUCCESS_MSG,
+                                       Example.class.getSimpleName(),
+                                       entity.getId()));
+
             return ResponseEntity.status(HttpStatus.OK)
                                  .body(entity.getId());
         } else {
+            logger.error(String.format(CREATE_ENTITY_FAILURE_MSG,
+                                       Example.class.getSimpleName()));
+
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                                  .build();
         }
@@ -174,33 +181,36 @@ public class ExampleResource extends AbstractSimpleResource<ExampleAsset, Exampl
     public ResponseEntity<Long> updateExample(@PathVariable("id") String id,
                                               @RequestBody ExampleAsset asset) {
         if(asset == null) {
-            logger.warn(GENERIC_BAD_REQUEST_MSG,
-                        "updateExample");
+            logger.warn(String.format(GENERIC_BAD_REQUEST_MSG,
+                                      "updateExample"));
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                                  .build();
         }
 
         try {
-            if(exampleRepo.existsById(Long.parseLong(id))) {
-                Example entity = convertToEntity(asset).setId(Long.parseLong(id));
+            Long realId = Long.parseLong(id);
+
+            if(exampleRepo.existsById(realId)) {
+                Example entity = (Example)convertToEntity(asset).setId(realId);
 
                 entity = exampleRepo.save(entity);
 
                 return ResponseEntity.status(HttpStatus.OK)
                                      .body(entity.getId());
             } else {
-                logger.warn(INVALID_UPDATE_MSG,
-                            Example.class.getSimpleName(),
-                            id);
+                logger.warn(String.format(INVALID_UPDATE_MSG,
+                                          Example.class.getSimpleName(),
+                                          id));
 
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                                      .build();
             }
         } catch(NumberFormatException nfe) {
-            logger.warn(INVALID_ID_MSG,
-                        id,
-                        "updateExample");
+            logger.warn(String.format(INVALID_ID_MSG,
+                                      id,
+                                      "updateExample"),
+                        nfe);
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                                  .build();
@@ -221,23 +231,25 @@ public class ExampleResource extends AbstractSimpleResource<ExampleAsset, Exampl
             if(exampleRepo.existsById(longId)) {
                 exampleRepo.deleteById(longId);
 
-                logger.debug(DELETE_BY_ID_SUCCESS_MSG,
-                             Example.class.getSimpleName());
+                logger.debug(String.format(DELETE_BY_ID_SUCCESS_MSG,
+                                           Example.class.getSimpleName(),
+                                           id));
 
                 return ResponseEntity.status(HttpStatus.OK)
                                      .build();
             } else {
-                logger.warn(DELETE_BY_ID_FAILURE_MSG,
-                            Example.class.getSimpleName(),
-                            id);
+                logger.warn(String.format(DELETE_BY_ID_FAILURE_MSG,
+                                          Example.class.getSimpleName(),
+                                          id));
 
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                                      .build();
             }
         } catch(NumberFormatException nfe) {
-            logger.error(INVALID_ID_MSG,
-                         id,
-                         "deleteExample");
+            logger.error(String.format(INVALID_ID_MSG,
+                                       id,
+                                       "deleteExample"),
+                         nfe);
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                                  .build();
@@ -246,13 +258,13 @@ public class ExampleResource extends AbstractSimpleResource<ExampleAsset, Exampl
 
     @Override
     ExampleAsset convertToAsset(Example model) {
-        return new ExampleAsset().setId(model.getId())
-                                 .setMessage(model.getMessage());
+        return new ExampleAsset(model.getId(),
+                                model.getMessage());
     }
 
     @Override
     Example convertToEntity(ExampleAsset asset) {
-        return new Example().setId(asset.getId())
-                            .setMessage(asset.getMessage());
+        //We don't set the ID here, so that we can protect ourselves from someone abusing the Create method.
+        return new Example().setMessage(asset.getMessage());
     }
 }

@@ -1,29 +1,26 @@
 package ca.purpleowl.examples.spring.boot.docker.data.ws.rest.asset;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
- * This POJO Represents the JSON model that we're passing back and forth... the REST Asset, if you will.
+ * This object represents the JSON model that we're passing back and forth... the REST Asset, if you will.
  *
- * There's usually not much to these things, and that is most assuredly the case here.
+ * We use a few annotations to help Jackson marshall and unmarshall the data.
  */
-public class ExampleAsset {
-    private Long id;
-    private String message;
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ExampleAsset extends BaseAsset {
+    private final String message;
 
-    public Long getId() {
-        return id;
-    }
-
-    public ExampleAsset setId(Long id) {
-        this.id = id;
-        return this;
+    @JsonCreator
+    public ExampleAsset(@JsonProperty("id") Long id,
+                        @JsonProperty("message") String message) {
+        super(id);
+        this.message = message;
     }
 
     public String getMessage() {
         return message;
-    }
-
-    public ExampleAsset setMessage(String message) {
-        this.message = message;
-        return this;
     }
 }
