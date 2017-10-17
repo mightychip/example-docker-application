@@ -13,7 +13,7 @@
 
     <groupId>ca.purpleowl.examples.spring.boot</groupId>
     <artifactId>docker-application-example</artifactId>
-    <version>BLOG-POST-1</version>
+    <version>BLOG-POST-2</version>
     <packaging>pom</packaging>
 
 

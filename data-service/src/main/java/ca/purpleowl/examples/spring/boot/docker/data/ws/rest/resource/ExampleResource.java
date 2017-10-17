@@ -116,7 +116,7 @@ public class ExampleResource extends AbstractSimpleResource<ExampleAsset, Exampl
             logger.warn(String.format(INVALID_ID_MSG,
                                       id,
                                       "getExample"),
-                        nfe);
+                                      nfe);
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                                  .build();

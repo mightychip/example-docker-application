@@ -7,7 +7,7 @@
     <parent>
         <groupId>ca.purpleowl.examples.spring.boot</groupId>
         <artifactId>docker-application-example</artifactId>
-        <version>BLOG-POST-1</version>
+        <version>BLOG-POST-2</version>
     </parent>
 
     <groupId>ca.purpleowl.examples.spring.boot.docker</groupId>
@@ -30,7 +30,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>172.16.118.137:5000/example-application-db</repository>
+                    <repository>192.168.99.128:5000/example-application-db</repository>
                     <tag>${project.version}</tag>
                 </configuration>
             </plugin>
