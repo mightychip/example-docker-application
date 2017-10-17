@@ -6,6 +6,12 @@ server:
 management:
   port: 8081
 ---
+logging:
+  level:
+    ROOT: INFO
+    org.springframework: INFO
+    ca.purpleowl.examples.spring.boot: DEBUG
+---
 #Here's our Dev server profile.
 spring:
   profiles: dev
@@ -17,7 +23,7 @@ spring:
     url: jdbc:postgresql://database:5432/exampledb
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     database: postgresql
 ---
 #This profile is used for integration tests, when we're only running this Spring Boot application.  We still need a

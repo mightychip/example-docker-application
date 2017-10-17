@@ -1,29 +1,15 @@
 package ca.purpleowl.examples.spring.boot.docker.data.jpa.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "example")
-public class Example {
-
-    @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    private Long id;
+public class Example extends BaseEntity {
 
     @Column
     private String message;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Example setId(Long id) {
-        this.id = id;
-        return this;
-    }
 
     public String getMessage() {
         return message;
