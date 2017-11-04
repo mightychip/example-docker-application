@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public abstract class BaseEntity {
+public abstract class AbstractBaseEntity {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
@@ -17,7 +17,7 @@ public abstract class BaseEntity {
         return id;
     }
 
-    public BaseEntity setId(Long id) {
+    public AbstractBaseEntity setId(Long id) {
         this.id = id;
         return this;
     }

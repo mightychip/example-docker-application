@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "example")
-public class Example extends BaseEntity {
+public class Example extends AbstractBaseEntity {
 
     @Column
     private String message;

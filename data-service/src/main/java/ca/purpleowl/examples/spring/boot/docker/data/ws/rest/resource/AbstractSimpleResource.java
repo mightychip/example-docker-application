@@ -1,7 +1,7 @@
 package ca.purpleowl.examples.spring.boot.docker.data.ws.rest.resource;
 
-import ca.purpleowl.examples.spring.boot.docker.data.jpa.entity.BaseEntity;
-import ca.purpleowl.examples.spring.boot.docker.data.ws.rest.asset.BaseAsset;
+import ca.purpleowl.examples.spring.boot.docker.data.jpa.entity.AbstractBaseEntity;
+import ca.purpleowl.examples.spring.boot.docker.data.ws.rest.asset.AbstractBaseAsset;
 
 /**
  * This is the base class for the REST Resources.  Any common methods will get placed here.
@@ -9,7 +9,7 @@ import ca.purpleowl.examples.spring.boot.docker.data.ws.rest.asset.BaseAsset;
  * @param <A> - The REST Asset, which the JSON model is built from.
  * @param <B> - The JPA Entity, which gets stored in and retrieved from the storage mechanism.
  */
-abstract class AbstractSimpleResource<A extends BaseAsset, B extends BaseEntity> {
+abstract class AbstractSimpleResource<A extends AbstractBaseAsset, B extends AbstractBaseEntity> {
 
     static final String CREATE_ENTITY_SUCCESS_MSG = "Created a new %s in the storage mechanism with ID %d";
     static final String CREATE_ENTITY_FAILURE_MSG = "Failed to create a new %s in the storage mechanism";

@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * We use a few annotations to help Jackson marshall and unmarshall the data.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ExampleAsset extends BaseAsset {
+public class ExampleAsset extends AbstractBaseAsset {
     private final String message;
 
     @JsonCreator
