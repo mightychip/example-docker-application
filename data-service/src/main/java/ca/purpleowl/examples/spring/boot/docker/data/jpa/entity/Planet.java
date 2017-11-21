@@ -1,23 +1,28 @@
 package ca.purpleowl.examples.spring.boot.docker.data.jpa.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import ca.purpleowl.examples.spring.boot.docker.data.jpa.entity.base.AbstractAstralEntity;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "planets")
+@Table(name = "\"planets\"")
 public class Planet extends AbstractAstralEntity {
-    @Column
+    @Column(name = "planet_id", nullable = false)
     private Long planetId;
 
-    @Column
+    @Column(name = "planet_name")
     private String planetName;
 
-    @Column
-    private Long systemId;
-
-    @Column
+    @Column(name = "type_id")
     private Integer typeId;
+
+    @OneToMany(mappedBy = "planet")
+    private List<Moon> moons;
+
+    @ManyToOne
+    @JoinColumn(name = "system_id", nullable = false)
+    private SolarSystem solarSystem;
 
     public Long getPlanetId() {
         return planetId;
@@ -37,21 +42,30 @@ public class Planet extends AbstractAstralEntity {
         return this;
     }
 
-    public Long getSystemId() {
-        return systemId;
-    }
-
-    public Planet setSystemId(Long systemId) {
-        this.systemId = systemId;
-        return this;
-    }
-
     public Integer getTypeId() {
         return typeId;
     }
 
     public Planet setTypeId(Integer typeId) {
         this.typeId = typeId;
+        return this;
+    }
+
+    public List<Moon> getMoons() {
+        return moons;
+    }
+
+    public Planet setMoons(List<Moon> moons) {
+        this.moons = moons;
+        return this;
+    }
+
+    public SolarSystem getSolarSystem() {
+        return solarSystem;
+    }
+
+    public Planet setSolarSystem(SolarSystem solarSystem) {
+        this.solarSystem = solarSystem;
         return this;
     }
 }

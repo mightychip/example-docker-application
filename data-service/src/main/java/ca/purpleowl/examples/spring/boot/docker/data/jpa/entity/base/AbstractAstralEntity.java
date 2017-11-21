@@ -1,4 +1,4 @@
-package ca.purpleowl.examples.spring.boot.docker.data.jpa.entity;
+package ca.purpleowl.examples.spring.boot.docker.data.jpa.entity.base;
 
 import ca.purpleowl.examples.spring.boot.docker.data.jpa.embeddable.AstralPosition;
 

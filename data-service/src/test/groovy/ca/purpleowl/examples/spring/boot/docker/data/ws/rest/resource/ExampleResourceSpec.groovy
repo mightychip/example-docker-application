@@ -77,7 +77,7 @@ class ExampleResourceSpec extends Specification {
     //a "simulation."  Technically, I don't think this could happen at all, come to think of it...
     def "simulate provision of empty ID to getExample"() {
         given:
-        mockRepo.findById(_ as Long) >> { throw new IllegalArgumentException("mocked") }
+        mockRepo.findById(_ as Long) >> { throw new IllegalArgumentException("This is a mocked exception!  Nothing bad happened in the build!") }
 
         when:
         def result = exampleResource.getExample("1")
@@ -87,6 +87,6 @@ class ExampleResourceSpec extends Specification {
         result instanceof ResponseEntity<ExampleAsset>
         result.statusCode == HttpStatus.INTERNAL_SERVER_ERROR
         result.body == null
-        1 * mockLogger.error('Wow!! Something bad happened in getExample!! mocked', _ as IllegalArgumentException)
+        1 * mockLogger.error('Wow!! Something bad happened in getExample!! This is a mocked exception!  Nothing bad happened in the build!', _ as IllegalArgumentException)
     }
 }

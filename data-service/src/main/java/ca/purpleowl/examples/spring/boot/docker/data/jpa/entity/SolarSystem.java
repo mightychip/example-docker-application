@@ -1,29 +1,39 @@
 package ca.purpleowl.examples.spring.boot.docker.data.jpa.entity;
 
+import ca.purpleowl.examples.spring.boot.docker.data.jpa.entity.base.AbstractAstralEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
-@Table(name = "solar_systems")
+@Table(name = "\"solar_systems\"")
 public class SolarSystem extends AbstractAstralEntity {
-    @Column
+    @Column(name = "system_id", nullable = false)
     private Long systemId;
 
-    @Column
+    @Column(name = "constellation_id")
     private Long constellationId;
 
-    @Column
+    @Column(name = "system_name")
     private String systemName;
 
-    @Column
+    @Column(name = "security_class")
     private String securityClass;
 
-    @Column
+    @Column(name = "security_status")
     private Double securityStatus;
 
-    @Column
+    @Column(name = "star_id")
     private Long starId;
+
+    @OneToMany(mappedBy = "solarSystem")
+    private List<Planet> planets;
+
+    @OneToMany(mappedBy = "solarSystem")
+    private List<Stargate> stargates;
 
     public Long getSystemId() {
         return systemId;
@@ -76,6 +86,24 @@ public class SolarSystem extends AbstractAstralEntity {
 
     public SolarSystem setStarId(Long starId) {
         this.starId = starId;
+        return this;
+    }
+
+    public List<Planet> getPlanets() {
+        return planets;
+    }
+
+    public SolarSystem setPlanets(List<Planet> planets) {
+        this.planets = planets;
+        return this;
+    }
+
+    public List<Stargate> getStargates() {
+        return stargates;
+    }
+
+    public SolarSystem setStargates(List<Stargate> stargates) {
+        this.stargates = stargates;
         return this;
     }
 }

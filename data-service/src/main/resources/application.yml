@@ -10,7 +10,7 @@ logging:
   level:
     ROOT: INFO
     org.springframework: INFO
-    ca.purpleowl.examples.spring.boot: DEBUG
+    ca.purpleowl.examples.spring.boot: INFO
 ---
 #Here's our Dev server profile.
 spring:
@@ -23,8 +23,14 @@ spring:
     url: jdbc:postgresql://database:5432/exampledb
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
     database: postgresql
+
+
 ---
 #This profile is used for integration tests, when we're only running this Spring Boot application.  We still need a
 #database to point to for any integration tests that require one to be present.  This serves that purpose perfectly.

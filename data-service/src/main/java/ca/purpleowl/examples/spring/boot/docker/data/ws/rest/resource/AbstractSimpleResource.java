@@ -1,6 +1,6 @@
 package ca.purpleowl.examples.spring.boot.docker.data.ws.rest.resource;
 
-import ca.purpleowl.examples.spring.boot.docker.data.jpa.entity.AbstractBaseEntity;
+import ca.purpleowl.examples.spring.boot.docker.data.jpa.entity.base.AbstractBaseEntity;
 import ca.purpleowl.examples.spring.boot.docker.data.ws.rest.asset.AbstractBaseAsset;
 
 /**

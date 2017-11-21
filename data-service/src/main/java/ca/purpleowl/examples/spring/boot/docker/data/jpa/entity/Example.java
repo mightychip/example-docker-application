@@ -1,11 +1,13 @@
 package ca.purpleowl.examples.spring.boot.docker.data.jpa.entity;
 
+import ca.purpleowl.examples.spring.boot.docker.data.jpa.entity.base.AbstractBaseEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "example")
+@Table(name = "\"example\"")
 public class Example extends AbstractBaseEntity {
 
     @Column
