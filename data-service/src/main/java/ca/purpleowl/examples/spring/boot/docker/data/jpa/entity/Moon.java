@@ -4,6 +4,14 @@ import ca.purpleowl.examples.spring.boot.docker.data.jpa.entity.base.AbstractAst
 
 import javax.persistence.*;
 
+/**
+ * Now, you're going to be looking at this and going, "What the heck, man?!  You inherit an ID, but your'e still making
+ * an ID?"
+ *
+ * Since I'm scraping this data from the EVE Swagger API, I want to keep the actual System ID.  It makes it easier to
+ * create the relationships without having to do much mapping, and it will make it easier for alerts and system stats
+ * and all kinds of stuff later.  It also guarantees this API works with other applications.
+ */
 @Entity
 @Table(name = "\"moons\"")
 public class Moon extends AbstractAstralEntity {
@@ -18,7 +26,8 @@ public class Moon extends AbstractAstralEntity {
 
     //You won't see this relationship in the Swagger API, and I have no idea why.
     @ManyToOne
-    @JoinColumn(name = "planet_id", nullable=false)
+    //TODO Set this to nullable=false after you finish work on the API.
+    @JoinColumn(name = "planet_id", nullable=true)
     private Planet planet;
 
     public Long getMoonId() {

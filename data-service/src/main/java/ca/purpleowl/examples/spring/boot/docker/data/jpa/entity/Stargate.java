@@ -16,7 +16,9 @@ public class Stargate extends AbstractAstralEntity {
     @Column(name = "type_id")
     private Integer typeId;
 
-    //TODO Should really link this to another solar system.
+    //While this could just be a link to another system, that just ends up
+    //creating a massive web of SolarSystem objects and their constituent bits
+    //and pieces.
     @Column(name = "destination_system_id", nullable = false)
     private Long destinationSystemId;
 

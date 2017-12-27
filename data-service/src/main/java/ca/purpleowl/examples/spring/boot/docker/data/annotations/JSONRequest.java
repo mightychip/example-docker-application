@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 /**
  * I'm not big on clutter, and when you start using a boatload of Annotations with a boatload of parameters,
  * you end up with a lot of clutter.  What I've done here is use the magic of {@link org.springframework.core.annotation.AliasFor} to create
- * a single annotation to create boilerplate Annotation clutter chunks.
+ * a single annotation to replace boilerplate Annotation clutter chunks.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})

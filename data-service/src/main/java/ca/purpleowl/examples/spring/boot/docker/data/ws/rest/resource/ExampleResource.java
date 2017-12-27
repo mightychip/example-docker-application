@@ -31,6 +31,7 @@ import java.util.Optional;
  * More than anything, this serves as a very simple example of a REST Resource/Controller.  We also return
  * {@link ResponseEntity} objects to allow us to specify status codes, indicating bad requests, internal errors, etc.
  */
+@SuppressWarnings("MVCPathVariableInspection")
 @RestController
 @Scope("request")
 @RequestMapping("/example")
@@ -53,7 +54,7 @@ public class ExampleResource extends AbstractSimpleResource<ExampleAsset, Exampl
     }
 
     /**
-     * Get a list of all {@link Example} entities storage in the persistent storage mechanism.
+     * Get a list of all {@link Example} entities stored in the persistent storage mechanism.
      *
      * @return A {@link ResponseEntity} containing an appropriate HTTP Status and - if present - any entities found.
      */
